@@ -1,0 +1,45 @@
+! special
+*foreground:   #dad7ce
+*background:   #080707
+*cursorColor:  #dad7ce
+
+! black
+*color0:       #0f0e0d
+*color8:       #de3730
+
+! red
+*color1:       #191917
+*color9:       #3f8d8d
+
+! green
+*color2:       #2b2a28
+*color10:      #478753
+
+! yellow
+*color3:       #43423f
+*color11:      #837745
+
+! blue
+*color4:       #62615d
+*color12:      #5cbf70
+
+! magenta
+*color5:       #888680
+*color13:      #e370d8
+
+! cyan
+*color6:       #b4b1aa
+*color14:      #ae9e56
+
+! white
+*color7:       #e5e2da
+*color15:      #59a969
+
+! Terminal configuration
+URxvt.font: xft:Droid Sans Mono:style=Regular:size=10
+URxvt.boldFont: xft:Droid Sans:style=Bold:size=10
+
+URxvt.perl-ext-common: resize-font
+URxvt.scrollBar: false
+
+URxvt.bell-command: canberra-gtk-play -i bell
