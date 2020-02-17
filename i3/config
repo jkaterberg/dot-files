@@ -43,7 +43,7 @@ client.placeholder      #000000 #0c0c0c #ffffff $black    #0c0c0c
 
 client.background       #ffffff
 
-default_border pixel
+default_border pixel 1 
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -54,12 +54,13 @@ bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
 bindsym $mod+Shift+p exec bash /home/justin/.screenlayout/single.sh
 
 #wallpaper
-exec feh --bg-fill ~/Pictures/wallpaper/00.jpg
+exec_always feh --bg-fill ~/Pictures/wallpaper/00.jpg
 
 # Applets
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id redshift-gtk
+exec --no-startup-id caffeine
 
 # Application shortcuts
 bindsym $mod+b exec firefox
@@ -221,6 +222,12 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+	colors{
+		statusline $white2
+		background #1d1f21
+		focused_workspace $green2 $green2 $black1
+		inactive_workspace #1d1f21 #1d1f21 $white2
+	}
 	
 	position top
 	font pango:Droid Sans Mono 10
