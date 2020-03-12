@@ -49,6 +49,9 @@ default_border pixel 1
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wallpaper/00.png --nofork
 
+#start compton
+exec --no-startup-id compton
+
 #set screen config
 bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
 bindsym $mod+Shift+p exec bash /home/justin/.screenlayout/single.sh
