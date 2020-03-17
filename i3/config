@@ -11,38 +11,32 @@
 
 set $mod Mod4
 
+#Set the color theme
+exec_always wal --theme base16-atelier-forest
+
+#exec xrdb ~/.config/.Xresources
+set_from_resource $fg 		i3wm.foreground #f0f0f0
+set_from_resource $bg 		i3wm.background #f0f0f0
+set_from_resource $active 	i3wm.color4 	#f0f0f0
+set_from_resource $text 	i3wm.color7 	#000000
+set_from_resource $good		i3wm.color2		#00ff00
+set_from_resource $degraded	i3wm.color3		#ff00ff
+set_from_resource $bad		i3wm.color1		#ff0000
+
+set $font Droid Sans Mono 10
 #Font
-font pango:Droid Sans Mono 8
+font=pangu:"$font"
 
-exec xrdb ~/.config/.Xresources
+# class                 border  backgr. text	indicator child_border
+client.focused          $active $bg     $fg  	$bg       $active
+client.focused_inactive $bg     $bg     $fg  	$bg       $bg
+client.unfocused        $bg     $bg     $fg  	$bg       $bg
+client.urgent           $bg     $bg     $fg  	$bg       $bg
+client.placeholder      $bg     $bg     $fg  	$bg       $bg
 
-# Colours
-set_from_resource $black1 	i3wm.color0 #000000
-set_from_resource $red1		i3wm.color1 #ff0000
-set_from_resource $green1	i3wm.color2 #00ff00
-set_from_resource $yellow1	i3wm.color3 #00ffff
-set_from_resource $blue1	i3wm.color4 #0000ff
-set_from_resource $magenta1	i3wm.color5 #0000ff
-set_from_resource $cyan1	i3wm.color6 #0000ff
-set_from_resource $white1	i3wm.color7 #ffffff
-set_from_resource $black2	i3wm.color8 #ffffff
-set_from_resource $red2		i3wm.color9 #ffffff
-set_from_resource $green2	i3wm.color10 #ffffff
-set_from_resource $yellow2	i3wm.color11 #ffffff
-set_from_resource $blue2	i3wm.color12 #0000ff
-set_from_resource $magenta2	i3wm.color13 #ffffff
-set_from_resource $cyan2	i3wm.color14 #ffffff
-set_from_resource $white2	i3wm.color15 #ffffff
+client.background       $bg
 
-# class                 border 	backgr. text    indicator child_border
-client.focused          $green2	$green2	$white1 $green2   $green2
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           $black2 $black2 #ffffff #900000   $black2
-client.placeholder      #000000 #0c0c0c #ffffff $black    #0c0c0c
-
-client.background       #ffffff
-
+#make the borders super small
 default_border pixel 1 
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
@@ -50,7 +44,10 @@ default_border pixel 1
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wallpaper/00.png --nofork
 
 #start compton
-exec --no-startup-id compton
+exec_always compton #-c ~/.config/compton.conf
+
+#start/configure dunstify
+exec_always --no-startup-id dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0
 
 #set screen config
 bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
@@ -224,16 +221,18 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command bash ~/.config/i3status/sync_status.sh "$good" "$degraded" "$bad" && i3status
 	colors{
-		statusline $white2
-		background #1d1f21
-		focused_workspace $green2 $green2 $black1
-		inactive_workspace #1d1f21 #1d1f21 $white2
+		statusline 		$fg
+		background 		$bg
+							
+		#					Border	Backgr.	Text
+		focused_workspace 	$active	$active	#ffffff 
+		inactive_workspace 	#1d1f21	#1d1f21	$white2
 	}
 	
 	position top
-	font pango:Droid Sans Mono 10
+	font pango:$font
 }
 
 # Allow applications to ask for password to perform root tasks

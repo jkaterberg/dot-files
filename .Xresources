@@ -35,10 +35,11 @@
 *.color7:       #707880
 *.color15:      #c5c8c6
 
-! Terminal configuration
-URxvt.font: xft:Droid Sans Mono:style=Regular:size=10
-URxvt.boldFont: xft:Droid Sans:style=Bold:size=10
 
+*.font: xft:Droid Sans Mono:style=Regular:size=10
+*.boldFont: xft:Droid Sans:style=Bold:size=10
+
+! Terminal config
 URxvt.perl-ext-common: resize-font
 URxvt.scrollBar: false
 
