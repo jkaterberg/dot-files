@@ -18,7 +18,8 @@ exec_always wal --theme base16-atelier-forest
 set_from_resource $fg 		i3wm.foreground #f0f0f0
 set_from_resource $bg 		i3wm.background #f0f0f0
 set_from_resource $active 	i3wm.color4 	#f0f0f0
-set_from_resource $text 	i3wm.color7 	#000000
+set_from_resource $text_d	i3wm.color7 	#000000
+set_from_resource $text_l	i3wm.color15	#000000
 set_from_resource $good		i3wm.color2		#00ff00
 set_from_resource $degraded	i3wm.color3		#ff00ff
 set_from_resource $bad		i3wm.color1		#ff0000
@@ -43,11 +44,11 @@ default_border pixel 1
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wallpaper/00.png --nofork
 
-#start compton
-exec_always compton #-c ~/.config/compton.conf
-
 #start/configure dunstify
-exec_always --no-startup-id dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0
+exec_always killall dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0; dunstify "Started Dunst"
+
+#start compton
+exec_always killall compton; compton; dunstify "Started Compton" 
 
 #set screen config
 bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
@@ -69,9 +70,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id bash ~/.config/i3/change_volume.sh +5% 
+bindsym XF86AudioLowerVolume exec --no-startup-id bash ~/.config/i3/change_volume.sh -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && bash ~/.config/i3/change_volume.sh +0%
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 #Brightness Controls
@@ -227,8 +228,8 @@ bar {
 		background 		$bg
 							
 		#					Border	Backgr.	Text
-		focused_workspace 	$active	$active	#ffffff 
-		inactive_workspace 	#1d1f21	#1d1f21	$white2
+		focused_workspace 	$active	$active	$text_l 
+		inactive_workspace 	$bg		$bg		$text_d
 	}
 	
 	position top
