@@ -45,10 +45,10 @@ default_border pixel 1
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wallpaper/00.png --nofork
 
 #start/configure dunstify
-exec_always killall dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0; dunstify "Started Dunst"
+exec_always killall dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0; dunstify "Started Dunst" -r 102030
 
 #start compton
-exec_always killall compton; compton; dunstify "Started Compton" 
+exec_always killall compton; compton; dunstify "Started Compton" -r 112233
 
 #set screen config
 bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
@@ -223,6 +223,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     status_command sync_status "$good" "$degraded" "$bad"; i3status
+	tray_output primary
 	colors{
 		statusline 		$fg
 		background 		$bg
