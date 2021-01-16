@@ -25,6 +25,7 @@ set t_Co=256
 set nocompatible
 filetype off
 
+
 "Plugins
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -33,6 +34,9 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+" gruvbox Color scheme
+Plugin 'morhetz/gruvbox'
 
 " Lightline
 Plugin 'itchyny/lightline.vim'
@@ -45,8 +49,26 @@ Plugin 'dense-analysis/ale'
 Plugin 'preservim/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 
-" pywal color coordinator
-Plugin 'dylanaraps/wal.vim'
+
+" YouCompleteMe
+Plugin 'ycm-core/YouCompleteMe'
+
+" Polyglot
+Plugin 'sheerun/vim-polyglot'
+
+" Rainbow Parentheses
+Plugin 'luochen1990/rainbow'
+let g:rainbow_active=1
+
+" LEXIMA
+Plugin 'cohama/lexima.vim'
+
+" Emmet
+Plugin 'mattn/emmet-vim'
+let g:user_emmet_leader_key=','
+
+" CSS color
+Plugin 'ap/vim-css-color'
 
 call vundle#end()
 
@@ -54,9 +76,10 @@ filetype plugin indent on
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme gruvbox
+let g:lightline = {'colorscheme': 'gruvbox'}
+
 syntax on
 set autoindent
 set nu
 set ts=4 sw=4
-colorscheme wal
-let g:lightline = {'colorscheme': 'wal'}

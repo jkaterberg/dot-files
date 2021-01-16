@@ -12,11 +12,11 @@
 set $mod Mod4
 
 #Set the color theme
-exec_always wal --theme base16-atelier-forest
+#exec_always wal --theme base16-atelier-forest
 
 #exec xrdb ~/.config/.Xresources
 set_from_resource $fg 		i3wm.foreground #f0f0f0
-set_from_resource $bg 		i3wm.background #f0f0f0
+set_from_resource $bg 		i3wm.background #ff0000
 set_from_resource $active 	i3wm.color4 	#f0f0f0
 set_from_resource $text_d	i3wm.color7 	#000000
 set_from_resource $text_l	i3wm.color15	#000000
@@ -25,6 +25,9 @@ set_from_resource $degraded	i3wm.color3		#ff00ff
 set_from_resource $bad		i3wm.color1		#ff0000
 
 set $font Droid Sans Mono 10
+
+##################################Appearance####################################
+
 #Font
 font=pangu:"$font"
 
@@ -44,36 +47,40 @@ default_border pixel 1
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wallpaper/00.png --nofork
 
+# Set the proper screen layout
+exec sh ~/.screenlayout/primary.sh
+exec nvidia-settings --assign CurrentMetaMode="DPY-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On}, DPY-4: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On}" 
+
 #start/configure dunstify
-exec_always killall dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0; dunstify "Started Dunst" -r 102030
+exec_always killall dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0;
 
 #start picom
-exec_always killall picom; picom; dunstify "Started Picom" -r 112233
+exec_always picom; dunstify "Started Picom" -r 112233
 
 #set screen config
-bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
-bindsym $mod+Shift+p exec bash /home/justin/.screenlayout/single.sh
+#bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
+#bindsym $mod+Shift+p exec bash /home/justin/.screenlayout/single.sh
 
 #wallpaper
-exec_always feh --bg-fill ~/Pictures/wallpaper/00.jpg
+exec_always nitrogen --restore
 
+##################################Applications####################################
 # Applets
-exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id redshift-gtk
-exec --no-startup-id caffeine
+exec --no-startup-id udiskie -ant -f pcmanfm
 
 # Application shortcuts
 bindsym $mod+b exec firefox
 bindsym $mod+m exec spotify
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
 
+##################################Function Keys####################################
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id change_volume +5% 
-bindsym XF86AudioLowerVolume exec --no-startup-id change_volume -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && change_volume +0%
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id sh ~/.config/scripts/change_volume +5% 
+bindsym XF86AudioLowerVolume exec --no-startup-id sh ~/.config/scripts/change_volume -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && ./change_volume +0%
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 #Brightness Controls
 bindsym XF86MonBrightnessUp exec --no-startup-id change_brightness -inc 5
@@ -84,9 +91,10 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl -a play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl -a next
 bindsym XF86AudioPrev exec --no-startup-id playerctl -a previous
 
+
+##################################System Navigation####################################
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -146,7 +154,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+z focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -161,6 +169,12 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# assign apps to specific workspaces
+assign [class="^spotify$"] $ws10
+assign [class="^discord$"] $ws10
+assign [class="^Transmission-gtk$"] $ws10
+assign [class="^Steam$"] $ws10
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -171,7 +185,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+0 workspace number $ws10; layout tabbed
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -184,6 +198,18 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+
+#Assign workspaces to specific monitor
+workspace $ws1 output HDMI-0
+workspace $ws2 output HDMI-0
+workspace $ws3 output HDMI-0
+workspace $ws4 output HDMI-0
+workspace $ws5 output HDMI-0
+workspace $ws6 output DP-1
+workspace $ws7 output DP-1
+workspace $ws8 output DP-1
+workspace $ws9 output DP-1
+workspace $ws10 output DP-1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -222,7 +248,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command sync_status "$good" "$degraded" "$bad"; i3status
+    status_command i3blocks
 	tray_output primary
 	colors{
 		statusline 		$fg
@@ -238,4 +264,4 @@ bar {
 }
 
 # Allow applications to ask for password to perform root tasks
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
