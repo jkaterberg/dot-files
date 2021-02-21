@@ -36,7 +36,7 @@ markup=none
 # See the script for details.
 
 [updates]
-command=~/.config/i3blocks/updates.sh
+command=~/.config/scripts/updates.sh
 interval=10
 separator=true;
 

@@ -65,10 +65,12 @@ Plugin 'cohama/lexima.vim'
 
 " Emmet
 Plugin 'mattn/emmet-vim'
-let g:user_emmet_leader_key=','
 
 " CSS color
 Plugin 'ap/vim-css-color'
+
+" VimTex
+Plugin 'lervag/vimtex'
 
 call vundle#end()
 
