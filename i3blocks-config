@@ -25,7 +25,7 @@
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
 # Change $SCRIPT_DIR to the location of your scripts!
-SCRIPT_DIR=~/.config/i3blocks
+SCRIPT_DIR=/home/justin/Documents/Dot-files/scripts
 separator_block_width=15
 markup=none
 
@@ -36,9 +36,14 @@ markup=none
 # See the script for details.
 
 [updates]
-command=~/.config/scripts/updates.sh
+command=$SCRIPT_DIR/updates.sh
 interval=10
 separator=true;
+
+[headsetBattery]
+command=$SCRIPT_DIR/check_headset_battery.sh
+interval=15
+separator=true
 
 # Network interface monitoring
 #
@@ -46,11 +51,17 @@ separator=true;
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
 #IFACE=wlan0
-command=~/.config/i3blocks/iface/iface
+command=$SCRIPT_DIR/iface
 color=#b8bb26
 interval=10
 
-[volume]
+# Date Time
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
+align=center
+
+#[volume]
 #label=♪
 #label=VOL
 #interval=once
@@ -98,11 +109,6 @@ interval=10
 #label=LOAD
 #interval=10
 
-# Date Time
-[time]
-command=date '+%Y-%m-%d %H:%M:%S'
-interval=1
-align=center
 
 # Generic media player support
 #

@@ -75,6 +75,11 @@ bindsym $mod+b exec firefox
 bindsym $mod+m exec spotify
 bindsym $mod+Return exec urxvt
 
+# Turn the lights of my headphone off to save battery
+exec_always headsetcontrol -l 0
+bindsym $mod+n exec headsetcontrol -l 0
+bindsym $mod+Shift+n exec headsetcontrol -l 1
+
 ##################################Function Keys####################################
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id sh ~/.config/scripts/change_volume +5% 
@@ -264,4 +269,4 @@ bar {
 }
 
 # Allow applications to ask for password to perform root tasks
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
