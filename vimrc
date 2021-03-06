@@ -49,7 +49,6 @@ Plugin 'dense-analysis/ale'
 Plugin 'preservim/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 
-
 " YouCompleteMe
 Plugin 'ycm-core/YouCompleteMe'
 
@@ -84,4 +83,4 @@ let g:lightline = {'colorscheme': 'gruvbox'}
 syntax on
 set autoindent
 set nu
-set ts=4 sw=4
+set ts=2 sw=2
