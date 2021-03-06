@@ -67,7 +67,6 @@ exec_always nitrogen --restore
 ##################################Applications####################################
 # Applets
 exec --no-startup-id volumeicon
-exec --no-startup-id redshift-gtk
 exec --no-startup-id udiskie -ant -f pcmanfm
 
 # Application shortcuts
