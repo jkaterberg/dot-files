@@ -50,7 +50,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wall
 
 # Set the proper screen layout
 exec sh ~/.screenlayout/primary.sh
-exec nvidia-settings --assign CurrentMetaMode="DPY-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On}, DPY-4: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On}" 
+exec nvidia-settings --assign CurrentMetaMode="DP-1:1920x1080_60 +0+0 {ForceCompositionPipeline=On}, HDMI-0:1920x1080_60 +1920+0 {ForceCompositionPipeline=On}, DVI-I-1:1920x1200_60 +3840+0 {ForceCompositionPipeline=On}" 
 
 #start/configure dunstify
 exec_always killall dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0;
