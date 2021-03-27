@@ -9,7 +9,6 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-
 set $mod Mod4
 
 #Set the color theme
@@ -49,14 +48,14 @@ default_border pixel 1
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wallpaper/00.png --nofork
 
 # Set the proper screen layout
-exec sh ~/.screenlayout/primary.sh
-exec nvidia-settings --assign CurrentMetaMode="DP-1:1920x1080_60 +0+0 {ForceCompositionPipeline=On}, HDMI-0:1920x1080_60 +1920+0 {ForceCompositionPipeline=On}, DVI-I-1:1920x1200_60 +3840+0 {ForceCompositionPipeline=On}" 
+exec_always sh ~/.screenlayout/primary.sh
+exec nvidia-settings --assign CurrentMetaMode="DP-1:1920x1080_60 +0+0 { ForceFullCompositionPipeline = On }, HDMI-0:1920x1080_60 +1920+0 { ForceFullCompositionPipeline = On }, DVI-I-1:1920x1200_60 +3840+0 { ForceFullCompositionPipeline = On }" 
 
 #start/configure dunstify
-exec_always killall dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0;
+exec_always pkill dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0;
 
 #start picom
-exec_always picom; dunstify "Started Picom" -r 112233
+exec_always picom
 
 #set screen config
 #bindsym $mod+p exec bash /home/justin/.screenlayout/dual.sh
@@ -185,36 +184,36 @@ assign [class="^Transmission-gtk$"] $wsR4
 assign [class="^Steam$"] $wsR4
 
 # switch to workspace
-bindsym $mod+F1 workspace number $wsL1
-bindsym $mod+F2 workspace number $wsL2
-bindsym $mod+F3 workspace number $wsL3
-bindsym $mod+F4 workspace number $wsL4
+bindsym $mod+1 workspace number $wsL1
+bindsym $mod+2 workspace number $wsL2
+bindsym $mod+3 workspace number $wsL3
+bindsym $mod+4 workspace number $wsL4
 
-bindsym $mod+F5 workspace number $wsC1
-bindsym $mod+F6 workspace number $wsC2
-bindsym $mod+F7 workspace number $wsC3
-bindsym $mod+F8 workspace number $wsC4
+bindsym $mod+5 workspace number $wsC1
+bindsym $mod+6 workspace number $wsC2
+bindsym $mod+7 workspace number $wsC3
+bindsym $mod+8 workspace number $wsC4
 
-bindsym $mod+F9 workspace number $wsR1
-bindsym $mod+F10 workspace number $wsR2
-bindsym $mod+F11 workspace number $wsR3
-bindsym $mod+F12 workspace number $wsR4; layout tabbed
+bindsym $mod+9 workspace number $wsR1
+bindsym $mod+0 workspace number $wsR2
+bindsym $mod+minus workspace number $wsR3
+bindsym $mod+equal workspace number $wsR4; layout tabbed
 
 # move focused container to workspace
-bindsym $mod+Shift+F1 move container to workspace number $wsL1
-bindsym $mod+Shift+F2 move container to workspace number $wsL2
-bindsym $mod+Shift+F3 move container to workspace number $wsL3
-bindsym $mod+Shift+F4 move container to workspace number $wsL4
+bindsym $mod+Shift+1 move container to workspace number $wsL1
+bindsym $mod+Shift+2 move container to workspace number $wsL2
+bindsym $mod+Shift+3 move container to workspace number $wsL3
+bindsym $mod+Shift+4 move container to workspace number $wsL4
 
-bindsym $mod+Shift+F5 move container to workspace number $wsC1
-bindsym $mod+Shift+F6 move container to workspace number $wsC2
-bindsym $mod+Shift+F7 move container to workspace number $wsC3
-bindsym $mod+Shift+F8 move container to workspace number $wsC4
+bindsym $mod+Shift+5 move container to workspace number $wsC1
+bindsym $mod+Shift+6 move container to workspace number $wsC2
+bindsym $mod+Shift+7 move container to workspace number $wsC3
+bindsym $mod+Shift+8 move container to workspace number $wsC4
 
-bindsym $mod+Shift+F9 move container to workspace number $wsR1
-bindsym $mod+Shift+F10 move container to workspace number $wsR2
-bindsym $mod+Shift+F11 move container to workspace number $wsR3
-bindsym $mod+Shift+F12 move container to workspace number $wsR4
+bindsym $mod+Shift+9 move container to workspace number $wsR1
+bindsym $mod+Shift+0 move container to workspace number $wsR2
+bindsym $mod+Shift+minus move container to workspace number $wsR3
+bindsym $mod+Shift+equal move container to workspace number $wsR4
 
 #Assign workspaces to specific monitor
 workspace $wsC1 output HDMI-0
