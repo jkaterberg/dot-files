@@ -84,3 +84,4 @@ syntax on
 set autoindent
 set nu
 set ts=2 sw=2
+set clipboard=unnamed

@@ -25,15 +25,9 @@
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
 # Change $SCRIPT_DIR to the location of your scripts!
-SCRIPT_DIR=/home/justin/Documents/Dot-files/scripts
+SCRIPT_DIR=/home/justin/Documents/Dot-files/scripts/
 separator_block_width=15
 markup=none
-
-# Volume indicator
-#
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
 
 [updates]
 command=$SCRIPT_DIR/updates.sh
