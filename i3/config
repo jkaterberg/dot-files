@@ -49,8 +49,8 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/Pictures/wall
 
 # Set the proper screen layout
 exec_always sh ~/.screenlayout/primary.sh
-exec nvidia-settings --assign CurrentMetaMode="DP-1:1920x1080_60 +0+0 { ForceFullCompositionPipeline = On }, HDMI-0:1920x1080_60 +1920+0 { ForceFullCompositionPipeline = On }, DVI-I-1:1920x1200_60 +3840+0 { ForceFullCompositionPipeline = On }" 
-
+#exec nvidia-settings --assign CurrentMetaMode="DP-1:1920x1080_60 +0+0 { ForceFullCompositionPipeline = On }, HDMI-0:1920x1080_60 +1920+0 { ForceFullCompositionPipeline = On }, DVI-I-1:1920x1200_60 +3840+0 { ForceFullCompositionPipeline = On }" 
+exec nvidia-settings --assign CurrentMetaMode=", HDMI-0:1920x1080_60 +0+0 { ForceFullCompositionPipeline = On }, DP-1:1920x1080_60 +1920+0 { ForceFullCompositionPipeline = On }" 
 #start/configure dunstify
 exec_always pkill dunst; dunst -lb "$bg" -nb "$bg" -cb "$bg" -lf "$fg" -bf "fg" -cf "$fg" -nf "$fg" -fn "$font" -s -lto 3 -nto 5 -cto 0;
 
@@ -65,6 +65,10 @@ exec_always picom
 exec_always nitrogen --restore
 
 ##################################Applications####################################
+# Startup apps
+exec --no-startup-id discord
+exec --no-startup-id i3-msg 'spotify'
+
 # Applets
 exec --no-startup-id volumeicon
 exec --no-startup-id udiskie -ant -f pcmanfm
@@ -76,7 +80,7 @@ bindsym $mod+m exec spotify
 bindsym $mod+Return exec urxvt
 
 # Turn the lights of my headphone off to save battery
-exec_always headsetcontrol -l 0
+exec_always headsetcontrol -spotifyl 0
 bindsym $mod+n exec headsetcontrol -l 0
 bindsym $mod+Shift+n exec headsetcontrol -l 1
 
@@ -105,7 +109,8 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show combi 
+#bindsym $mod+d exec --no-startup-id rofi -show combi 
+bindsym $mod+d exec i3-dmenu-desktop
 
 #Scratchpad
 bindsym $mod+Shift+x move scratchpad
@@ -231,6 +236,21 @@ workspace $wsR1 output DVI-I-1
 workspace $wsR2 output DVI-I-1
 workspace $wsR3 output DVI-I-1
 workspace $wsR4 output DVI-I-1
+
+#workspace $wsC1 output HDMI-0
+#workspace $wsC2 output HDMI-0
+#workspace $wsC3 output DP-1
+#workspace $wsC4 output DP-1
+#
+#workspace $wsL1 output HDMI-0
+#workspace $wsL2 output HDMI-0
+#workspace $wsL3 output HDMI-0
+#workspace $wsL4 output HDMI-0
+#
+#workspace $wsR1 output DP-1
+#workspace $wsR2 output DP-1
+#workspace $wsR3 output DP-1
+#workspace $wsR4 output DP-1
 
 
 # reload the configuration file
